@@ -7,13 +7,16 @@ workflows:
       xcode: latest
 
     scripts:
-      - name: Flutter pub get
-        script: |
-          flutter pub get
+  - name: Build unsigned iOS app
+    script: |
+      flutter clean
+      flutter pub get
 
-      - name: Build unsigned iOS app
-        script: |
-          flutter build ios --release --no-codesign
+      cd ios
+      pod install
+      cd ..
+
+      flutter build ios --release --no-codesign
 
     artifacts:
       - build/ios/iphoneos/Runner.app
