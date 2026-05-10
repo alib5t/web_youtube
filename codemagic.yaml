@@ -1,31 +1,19 @@
 workflows:
-  ios-runner-app:
-    name: iOS Runner App
-    max_build_duration: 60
+  ios-unsigned:
+    name: Unsigned iOS Build
 
     environment:
       flutter: stable
 
     scripts:
-      - name: Flutter clean
-        script: |
-          flutter clean
-          flutter pub get
+      - flutter clean
+      - flutter pub get
 
-      - name: Install pods
-        script: |
-          cd ios
-          pod install
-          cd ..
+      # Podfile KALIR, sorun değil
+      - cd ios && pod install && cd ..
 
-      - name: Safe iOS build (no signing)
-        script: |
-          export CODE_SIGNING_ALLOWED=NO
-          export CODE_SIGNING_REQUIRED=NO
-          export CODE_SIGN_IDENTITY=""
-
-          flutter build ios --release --no-codesign
+      # İMZASIZ BUILD
+      - flutter build ios --release --no-codesign
 
     artifacts:
-      - build/ios/ipa/*.ipa
-      - build/ios/iphoneos/*.app
+      - build/ios/iphoneos/Runner.app
