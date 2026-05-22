@@ -3,7 +3,7 @@ workflows:
     name: Unsigned iOS Build
 
     environment:
-      flutter: stable
+      flutter: 3.10.6
 
     scripts:
       - flutter clean
