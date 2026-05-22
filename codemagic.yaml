@@ -9,9 +9,6 @@ workflows:
       - flutter clean
       - flutter pub get
 
-      # Podfile KALIR, sorun değil
-      - cd ios && pod install && cd ..
-
       # İMZASIZ BUILD
       - flutter build ios --release --no-codesign
 
